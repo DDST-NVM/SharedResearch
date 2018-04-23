@@ -32,20 +32,22 @@ Please refer to the References below.
 
 For example, my name is Cui Dawang and I have read two papers named A.pdf (FAST) and B.pdf (OSDI) 
 
-> git clone https://github.com/DDST-NVM/SharedResearch.git
-> cd SharedResearch/
-> cd ReadingList/
-> vim README.md (Read the notice for writing week report)
-> mkdir CuiDawang
-> cd CuiDawang
-> cp ../HuangKaixin/hkx-template.md  ./cdw.md
-> vim cdw.md (fill content in this file according to hints and HuangKaixin/hkx.md)
-> cd ../../Papers/
-> mkdir FAST; mkdir OSDI (if the dir exists, then you don't have to create it)
-> cp pathToPaperSet/A.pdf 
-> cp pathToPaperSet/B.pdf
-> cd ../
-> git add .
-> git commit -m 'write your own comments here to help others know what is updated'
-> git pull (it's a good habit to pull before you push)
-> git push origin master (for https method, you have to input your Github account and password then)
+``` 
+git clone https://github.com/DDST-NVM/SharedResearch.git
+cd SharedResearch/
+cd ReadingList/
+vim README.md (Read the notice for writing week report)
+mkdir CuiDawang
+cd CuiDawang
+cp ../HuangKaixin/hkx-template.md  ./cdw.md
+vim cdw.md (fill content in this file according to hints and HuangKaixin/hkx.md)
+cd ../../Papers/
+mkdir FAST; mkdir OSDI (if the dir exists, then you don't have to create it)
+cp pathToPaperSet/A.pdf 
+cp pathToPaperSet/B.pdf
+cd ../
+git add .
+git commit -m 'write your own comments here to help others know what is updated'
+git pull (it's a good habit to pull before you push)
+git push origin master (for https method, you have to input your Github account and password then)
+```
