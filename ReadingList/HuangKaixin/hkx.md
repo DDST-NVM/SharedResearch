@@ -43,13 +43,24 @@ The wear-out problem seems to be a slight point in real NVM platform (e.g., AEP 
 
 Besides, data consistency is an important problem to be solved while in this paper, I can't obtain any tricky method for consistency guarantee for proposed index sturcture and indexing scheme.
 
-### Title 2
+### Soft Updates Made Simple and Fast on Non-volatile Memory (Mingkai Dong and Haibo Chen)
 
 #### Summary
 
+This work revists Soft-update, which is a metadata update mechanism in traditional disk-oriented file systems, into non-volatile memory with NVM-optimized design.
+Soft-update is an intriguing idea that eliminates most synchronous metadata updates through delayed writes and dependency tracking.
+Since the logging/journaling persistence procedure is removed from the critical path, SoupFS obtains elevant performace improvement.
+
 #### Strength
+- It has a detailed analysis of the complexity of soft updates and the argument that soft updates can be made simple for NVM.
+- It gives a detailed review of the update dependencies of filesystems on NVM with a lot of figures and abundant explanation.
+- It uses multiple benchmarks to prove the performance advantage of SoupFS, including microbenchmarks (filetest, dirtest) and macrobenchmarks(Filebench, Postmark).
 
 #### Weakness/Thought
+
+Soft-upate is an old method in file systems and the researchers just make the old thing "great" again. The inspiration is: how can I utilize some old "fashions" in persistent memory system design?
+I want to exploit hybrid logging in Daisy to minimize the logging overhead in critical path. The concrete methodology is: recognize workload with insert/update to use redo or undo.
+We can adaptively choose one logging method with the changing of writing workloads. 
 
 ## [2018 Former] Week 10
 
