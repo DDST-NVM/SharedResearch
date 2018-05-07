@@ -64,7 +64,56 @@ We can adaptively choose one logging method with the changing of writing workloa
 
 ## [2018 Former] Week 10
 
-[Refer to Week 9]
+### A High Performance File System for Non-Volatile Main Memory
+
+### Summary
+
+They revisit current state-of-the-art NVMM-aware file systems and draw a key observation that the slow NVM writes incur the most of performance degrading. 
+To remove the write overhead from critical path, they propose a novel NVM-based file system, named HiNFS.
+It uses a DRAM write buffer to support lazy-persistent file writes to DRAM, which avoids the slow writes to NVM.
+To solve the double write problem, they propose a new consistency mechanism to reduce double writes and inconsistency between DRAM and NVM.
+
+### Strength
+
+- They reveal the problem of the direct access overheads by quantifying the copy overheads of state-of-the-art NVMM-aware file systems on a simulated NVMM device, which shows credible information and motivation.
+- They propose an NVMM-aware Write Buffer policy to hide the long write latency of NVMM by buffering the lazy-persistent
+file writes in DRAM temporarily.
+- They ensure read consistency by using a combination of the DRAM Block Index and Cache-line Bitmap to track the
+latest data between DRAM and NVMM.
+- They implement HiNFS as a kernel module in Linux kernel 3.11.0 and evaluate it on software NVMM emulators using extensive workloads to enhance the variety of results.
+
+### Weakness
+
+- The basement of this paper is the long write latency of NVM, which may not be a critical problem for current NVM hardwares.
+- The key assumption that OS is aware of DRAM space and NVM, which is contradictory with the Intel Apache Pass.
+- It only compares itself to two NVM-based file systems? What about comparing to NOVA and ...?
+- The overhead of managing DRAM buffer and more complicated consistency mechanism is not discussed much.
+
+### RFP: When RPC is Faster than Server-Bypass with RDMA
+
+#### Summary
+
+In this paper, they introduce two interesting observations about RDMA. 
+First, RDMA has asymmetric performance characteristics, which can be used to improve server-reply’s performance. 
+Second, the performance of server-bypass is not as good as expected in many cases, because more rounds of RDMA may be needed if the server is totally bypassed.
+
+Based on these two observations, they therefore introduce a new RDMA paradigm called Remote
+Fetching Paradigm (RFP). 
+It supports the legacy RPC interfaces and hence avoids the need of redesigning application-specific data
+structures. With proper parameters, it can achieve even higher IOPS than that of the previous paradigms. We have designed and implemented an in-memory key-value store based on RFP to evaluate its effectiveness.
+
+#### Strength
+
+- They report two key observations about RDMA and its usage paradigms by credible experiments;
+- They propose a new RDMA-based RPC paradigm called RFP that provides higher performance but with moderate porting cost; 
+- They design and implement an in-memory key-value store to validate the effectiveness of RFP.
+
+#### Thought
+
+- The asymmetry of RDMA is a good challenge and we should also care for this in our project.
+- RFP may be directly utilized or with slight modification for better performance.
+- Distributed transaction consistency should be introduced when considering RDMA communication.
+
 
 ## [2018 Former] Week 11
 
